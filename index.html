@@ -4,8 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>RanContracting - Dubai Subcontracting Team</title>
+  <meta name="description" content="RanContracting is a Dubai-based subcontracting team offering electrical, plumbing, civil, and maintenance services across the UAE.">
+  <link rel="icon" type="image/png" href="favicon.png" />
   <style>
-    /* Reset */
     * {
       margin: 0; padding: 0; box-sizing: border-box;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -64,6 +65,11 @@
       margin-bottom: 20px;
     }
 
+    ul {
+      padding-left: 20px;
+      list-style-type: disc;
+    }
+
     .team {
       display: flex;
       flex-wrap: wrap;
@@ -103,7 +109,6 @@
       font-size: 0.9rem;
     }
 
-    /* Responsive */
     @media(max-width: 600px) {
       .team {
         flex-direction: column;
@@ -148,6 +153,11 @@
     <h2>Meet Our Team</h2>
     <div class="team">
       <div class="member">
+        <img src="images/zeeshan.jpg" alt="Muhammad Zeeshan Aslam - CEO" />
+        <h3>Muhammad Zeeshan Aslam</h3>
+        <p>Chief Executive Officer</p>
+      </div>
+      <div class="member">
         <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Ahmed - Project Manager" />
         <h3>Ahmed</h3>
         <p>Project Manager</p>
@@ -172,8 +182,8 @@
 
   <section id="contact">
     <h2>Contact Us</h2>
-    <p>Email: <a href="mailto: admin@rancontracting.com">admin@rancontracting.com</a></p>
-    <p>Phone: +971 50 123 4567</p>
+    <p>Email: <a href="mailto:admin@rancontracting.com">admin@rancontracting.com</a></p>
+    <p>Phone: <a href="tel:+971543994914">+971 54 399 4914</a></p>
     <p>Address: Dubai, United Arab Emirates</p>
   </section>
 </main>
@@ -181,6 +191,18 @@
 <footer>
   &copy; 2025 RanContracting. All rights reserved.
 </footer>
+
+<script>
+  // Smooth scrolling for nav links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute('href')).scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
+  });
+</script>
 
 </body>
 </html>
