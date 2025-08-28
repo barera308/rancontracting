@@ -266,9 +266,13 @@
 function moveCarousel(carouselId, direction) {
   const carousel = document.getElementById(carouselId);
   const track = carousel.querySelector('.carousel-track');
-  const scrollAmount = carousel.clientWidth; // scroll by visible width
-  let newScroll = track.scrollLeft + direction * scrollAmount;
+  const items = track.querySelectorAll('.carousel-item');
+  const gap = parseInt(getComputedStyle(track).gap) || 0;
+  const itemWidth = items[0].offsetWidth + gap; // width of one item including gap
 
+  let newScroll = track.scrollLeft + direction * itemWidth;
+
+  // Looping logic
   if (newScroll < 0) newScroll = track.scrollWidth - track.clientWidth;
   if (newScroll > track.scrollWidth - track.clientWidth) newScroll = 0;
 
@@ -285,7 +289,11 @@ document.querySelectorAll('.carousel').forEach(carousel => {
   let startX, isDragging = false;
   const track = carousel.querySelector('.carousel-track');
 
-  track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; isDragging = true; });
+  track.addEventListener('touchstart', e => { 
+    startX = e.touches[0].clientX; 
+    isDragging = true; 
+  });
+
   track.addEventListener('touchmove', e => {
     if(!isDragging) return;
     const x = e.touches[0].clientX;
@@ -293,8 +301,10 @@ document.querySelectorAll('.carousel').forEach(carousel => {
     track.scrollLeft += walk;
     startX = x;
   });
+
   track.addEventListener('touchend', () => { isDragging = false; });
 });
 </script>
 </body>
 </html>
+
