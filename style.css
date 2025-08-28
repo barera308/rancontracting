@@ -1,4 +1,86 @@
-/* Carousel Styles */
+/* ==================== General Styles ==================== */
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  background: #f4f4f4;
+  color: #333;
+}
+
+/* ==================== Hero Header ==================== */
+.hero-header {
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/ran.jpeg') no-repeat center center/cover;
+  min-height: 450px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 1rem;
+}
+
+.hero-header p {
+  margin: 0.5rem 0 1.5rem 0;
+  font-size: 1.2rem;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+}
+
+.hero-nav {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.hero-nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1rem;
+  padding: 8px 15px;
+  border-radius: 6px;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  backdrop-filter: blur(5px);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.hero-nav a:hover {
+  color: #004080;
+  background: #ffcc00;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* ==================== General Sections ==================== */
+section {
+  padding: 3rem 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto 2rem auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+h2 {
+  text-align: center;
+  color: #004080;
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+/* ==================== Carousel Styles ==================== */
 .carousel {
   position: relative;
   overflow: hidden;
@@ -29,10 +111,10 @@
   box-shadow: 0 8px 25px rgba(0,0,0,0.2);
 }
 
-/* New wrapper to maintain consistent image height */
+/* Auto-adjusting aspect ratio for images */
 .carousel-item-image-wrapper {
   width: 100%;
-  height: 200px; /* Fixed height for all images */
+  aspect-ratio: 16/10; /* maintains width/height ratio */
   background-color: #eee;
   border-bottom: 3px solid #004080;
   display: flex;
@@ -44,8 +126,13 @@
 .carousel-item-image-wrapper img {
   width: 100%;
   height: 100%;
-  object-fit: contain; /* Ensure full image is visible */
+  object-fit: cover; /* fills wrapper while preserving aspect ratio */
   object-position: center;
+  transition: transform 0.3s ease;
+}
+
+.carousel-item:hover img {
+  transform: scale(1.05);
 }
 
 .carousel-item h3 {
@@ -60,7 +147,7 @@
   color: #555;
 }
 
-/* Carousel arrows */
+/* Carousel Arrows */
 .carousel-arrow {
   position: absolute;
   top: 50%;
@@ -85,17 +172,118 @@
 .carousel-arrow.left { left: 10px; }
 .carousel-arrow.right { right: 10px; }
 
-/* Responsive Adjustments */
-@media(max-width: 768px) {
-  .carousel-item {
-    min-width: 90%;
-  }
-  .carousel-item-image-wrapper {
-    height: 180px;
-  }
+/* ==================== Career Button ==================== */
+.career-btn {
+  display: block;
+  width: 250px;
+  margin: 2rem auto;
+  padding: 15px 20px;
+  text-align: center;
+  background: #ffcc00;
+  color: #004080;
+  font-weight: bold;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
 }
+
+.career-btn:hover {
+  background: #e6b800;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+}
+
+/* ==================== Team Section ==================== */
+.team-members {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.team-members .member {
+  background: #e6f0ff;
+  border-radius: 10px;
+  padding: 20px;
+  width: 250px;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.team-members .member:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.team-members img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  object-fit: cover;
+  border: 4px solid #004080;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.team-members h3 {
+  color: #004080;
+  margin-bottom: 5px;
+  font-size: 1.4rem;
+}
+
+.team-members p {
+  color: #666;
+  font-size: 0.95rem;
+}
+
+/* ==================== Contact Section ==================== */
+#contact p {
+  font-size: 1.1rem;
+  color: #444;
+}
+
+#contact a {
+  color: #004080;
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+#contact a:hover {
+  color: #ffcc00;
+}
+
+/* ==================== Footer ==================== */
+footer {
+  background: #004080;
+  color: #fff;
+  text-align: center;
+  padding: 1.5rem;
+  margin-top: 3rem;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+}
+
+/* ==================== Responsive ==================== */
+@media(max-width: 768px) {
+  .hero-header { min-height: 350px; padding: 1.5rem 0.5rem; }
+  .hero-header p { font-size: 1rem; }
+  .hero-nav { flex-direction: column; gap: 15px; max-width: 300px; width: 100%; }
+  .hero-nav a { width: 100%; padding: 10px; }
+  section { padding: 2rem 1rem; margin: 0 1rem 2rem 1rem; }
+  h2 { font-size: 2rem; }
+  .carousel-item { min-width: 90%; }
+  .team-members .member { width: 90%; padding: 15px; }
+  .team-members img { width: 100px; height: 100px; }
+  .career-btn { width: 90%; padding: 12px; }
+}
+
 @media(max-width: 480px) {
-  .carousel-item-image-wrapper {
-    height: 150px;
-  }
+  .hero-header p { font-size: 0.9rem; }
+  .carousel-item-image-wrapper { aspect-ratio: 1/1; } /* square on small screens */
 }
