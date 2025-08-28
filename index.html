@@ -12,42 +12,58 @@
       line-height: 1.6;
       background: #f4f4f4;
     }
+
+    /* --- Header --- */
     header {
       background: #004080;
       color: #fff;
-      padding: 1rem;
+      padding: 0.8rem 2rem;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
     }
     .header-container {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 20px;
       flex-wrap: wrap;
     }
     .logo {
-      height: 120px;
+      height: 70px;
       width: auto;
+    }
+    .header-text {
+      flex: 1;
+      margin-left: 15px;
     }
     .header-text h1 {
       margin: 0;
-      font-size: 2.5rem;
+      font-size: 1.8rem;
     }
     .header-text p {
       margin: 0;
-      font-size: 1rem;
+      font-size: 0.9rem;
     }
     nav {
-      margin-top: 10px;
-      text-align: center;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
     }
     nav a {
       color: #fff;
-      margin: 0 10px;
       text-decoration: none;
       font-weight: bold;
       transition: color 0.3s;
     }
     nav a:hover {
       color: #ffcc00;
+    }
+
+    /* --- Page spacing to prevent header overlap --- */
+    body {
+      padding-top: 100px; /* height of header */
     }
 
     section {
@@ -168,10 +184,15 @@
       margin-top: 2rem;
     }
 
-    @media(max-width: 600px) {
+    @media(max-width: 768px) {
       .header-container {
         flex-direction: column;
         align-items: center;
+        text-align: center;
+      }
+      nav {
+        margin-top: 10px;
+        justify-content: center;
       }
       .carousel-item {
         min-width: 80%;
@@ -184,19 +205,26 @@
 </head>
 <body>
 <header>
-  <div class="header-container" style="justify-content: center;">
-    <!-- Full-size logo -->
+  <div class="header-container">
+    <!-- Logo -->
     <img src="https://raw.githubusercontent.com/barera308/rancontracting/refs/heads/main/images/ran.jpeg" 
          alt="RanContracting" 
-         class="logo" 
-         style="height: 250px; width: auto;">
+         class="logo">
+
+    <!-- Site Name -->
+    <div class="header-text">
+      <h1>RanContracting</h1>
+      <p>Construction & Contracting Services</p>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+      <a href="#services">Our Services</a>
+      <a href="#team">Our Team</a>
+      <a href="#contact">Contact</a>
+      <a href="#career">Career</a>
+    </nav>
   </div>
-  <nav>
-    <a href="#services">Our Services</a>
-    <a href="#team">Our Team</a>
-    <a href="#contact">Contact</a>
-    <a href="#career">Career</a>
-  </nav>
 </header>
 
   <!-- Our Services Section -->
@@ -289,6 +317,7 @@
   <footer>
     <p>&copy; 2025 RanContracting. All Rights Reserved.</p>
   </footer>
+
 <script>
 document.querySelectorAll('.carousel').forEach(carousel => {
   const track = carousel.querySelector('.carousel-track');
@@ -333,9 +362,3 @@ document.querySelectorAll('.carousel').forEach(carousel => {
 </script>
 </body>
 </html>
-
-
-
-
-
-
