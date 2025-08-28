@@ -4,14 +4,35 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
 
+  <!-- Homepage -->
+  <url>
+    <loc>https://rancontracting.com</loc>
+    <lastmod>2025-08-28T18:00:00+00:00</lastmod>
+  </url>
 
-<url>
-  <loc>https://rancontracting.com</loc>
-  <lastmod>2025-08-04T09:56:39+00:00</lastmod>
-</url>
+  <!-- Add Page -->
+  <url>
+    <loc>https://rancontracting.com/add</loc>
+    <lastmod>2025-08-28T18:00:00+00:00</lastmod>
+  </url>
 
-
+  <!-- Other sections (anchors on homepage) -->
+  <url>
+    <loc>https://rancontracting.com#about</loc>
+    <lastmod>2025-08-28T18:00:00+00:00</lastmod>
+  </url>
+  <url>
+    <loc>https://rancontracting.com#services</loc>
+    <lastmod>2025-08-28T18:00:00+00:00</lastmod>
+  </url>
+  <url>
+    <loc>https://rancontracting.com#contact</loc>
+    <lastmod>2025-08-28T18:00:00+00:00</lastmod>
+  </url>
+  <url>
+    <loc>https://rancontracting.com#career</loc>
+    <lastmod>2025-08-28T18:00:00+00:00</lastmod>
+  </url>
 
 </urlset>
