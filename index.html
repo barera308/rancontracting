@@ -475,9 +475,11 @@ document.addEventListener('DOMContentLoaded', () => {
     let index = 0;
 
     const getVisibleItemsCount = () => {
+      if (items.length === 0) return 0;
       const carouselWidth = carousel.offsetWidth;
       const itemWidthWithGap = items[0].offsetWidth + gap;
-      return Math.floor(carouselWidth / itemWidthWithGap);
+      let count = Math.floor(carouselWidth / itemWidthWithGap);
+      return Math.max(1, count); // Ensure at least 1 item is visible if items exist
     };
 
     const updateCarousel = () => {
@@ -496,24 +498,30 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeCarousel(); // Initial call
 
     leftBtn.addEventListener('click', () => {
-      index = (index - 1 + items.length) % items.length; // Loop back
-      if (index < 0) index = items.length - getVisibleItemsCount(); // Prevent showing blank space
+      index = Math.max(0, index - 1); // Decrement and clamp at 0
       updateCarousel();
     });
 
     rightBtn.addEventListener('click', () => {
-      index = (index + 1) % items.length; // Loop back
       const maxIndex = items.length - getVisibleItemsCount();
-      if (index > maxIndex) index = 0; // Reset to start if it goes beyond last visible group
+      index = Math.min(maxIndex, index + 1); // Increment and clamp at maxIndex
       updateCarousel();
     });
 
     // Auto-scroll functionality
     let autoScrollInterval;
+    const advanceCarousel = () => {
+      const maxIndex = items.length - getVisibleItemsCount();
+      if (index < maxIndex) {
+        index++;
+      } else {
+        index = 0; // Loop back to the beginning when reaching the end for auto-scroll
+      }
+      updateCarousel();
+    };
+
     const startAutoScroll = () => {
-      autoScrollInterval = setInterval(() => {
-        rightBtn.click();
-      }, **20000**); // Scrolls every 20 seconds (changed from 8000)
+      autoScrollInterval = setInterval(advanceCarousel, 20000); // Scrolls every 20 seconds
     };
 
     const stopAutoScroll = () => {
@@ -532,13 +540,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let startX = 0;
     let currentTranslate = 0;
     let prevTranslate = 0;
-    let animationID;
+    // Removed animationID as it was not being used.
 
     track.addEventListener('touchstart', (e) => {
       startX = e.touches[0].clientX;
       prevTranslate = currentTranslate;
       stopAutoScroll(); // Pause auto-scroll during manual interaction
-      cancelAnimationFrame(animationID);
+      // Removed cancelAnimationFrame(animationID); as animationID is not used for this.
     });
 
     track.addEventListener('touchmove', (e) => {
@@ -551,9 +559,10 @@ document.addEventListener('DOMContentLoaded', () => {
     track.addEventListener('touchend', () => {
       const movedBy = currentTranslate - prevTranslate;
       const itemWidth = items[0].offsetWidth + gap;
+      const maxIndex = items.length - getVisibleItemsCount(); // Recalculate maxIndex
 
       if (movedBy < -50) { // Swiped left significantly
-        index = Math.min(index + 1, items.length - getVisibleItemsCount());
+        index = Math.min(index + 1, maxIndex);
       } else if (movedBy > 50) { // Swiped right significantly
         index = Math.max(index - 1, 0);
       }
