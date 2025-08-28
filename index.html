@@ -10,6 +10,7 @@
       margin: 0;
       padding: 0;
       line-height: 1.6;
+      background: #f4f4f4;
     }
     header {
       background: #004080;
@@ -19,12 +20,11 @@
     .header-container {
       display: flex;
       align-items: center;
-      justify-content: center;
       gap: 20px;
       flex-wrap: wrap;
     }
     .logo {
-      height: 120px; /* bigger logo */
+      height: 120px;
       width: auto;
     }
     .header-text h1 {
@@ -44,7 +44,12 @@
       margin: 0 10px;
       text-decoration: none;
       font-weight: bold;
+      transition: color 0.3s;
     }
+    nav a:hover {
+      color: #ffcc00;
+    }
+
     section {
       padding: 2rem;
     }
@@ -53,30 +58,63 @@
       color: #004080;
       margin-bottom: 1rem;
     }
-    .team-members, .services-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
+
+    /* Carousel container */
+    .carousel {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      margin: 0 auto;
     }
-    .member, .service {
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+      gap: 20px;
+      scroll-behavior: smooth;
+    }
+    .carousel-item {
+      min-width: 250px;
       background: #f9f9f9;
       border-radius: 8px;
-      padding: 15px;
       text-align: center;
-      width: 200px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      transition: transform 0.3s;
+      flex-shrink: 0;
     }
-    .member:hover, .service:hover {
-      transform: translateY(-5px);
-    }
-    .member img, .service img {
+    .carousel-item img {
       width: 100%;
-      height: 200px;
+      height: 250px;
       object-fit: cover;
       border-radius: 8px;
     }
+    .carousel-item h3 {
+      margin: 10px 0 5px 0;
+    }
+    .carousel-item p {
+      padding: 0 10px 10px 10px;
+      font-size: 0.95rem;
+    }
+
+    /* Carousel arrows */
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2rem;
+      background: rgba(0,0,0,0.3);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      padding: 5px 10px;
+      border-radius: 5px;
+      z-index: 2;
+    }
+    .carousel-arrow.left {
+      left: 10px;
+    }
+    .carousel-arrow.right {
+      right: 10px;
+    }
+
     .career-btn {
       display: block;
       width: 220px;
@@ -93,6 +131,7 @@
     .career-btn:hover {
       background: #e6b800;
     }
+
     footer {
       background: #004080;
       color: #fff;
@@ -100,13 +139,14 @@
       padding: 1rem;
       margin-top: 2rem;
     }
+
     @media(max-width: 600px) {
       .header-container {
         flex-direction: column;
         align-items: center;
       }
-      .member, .service {
-        width: 80%;
+      .carousel-item {
+        min-width: 80%;
       }
     }
   </style>
@@ -131,54 +171,62 @@
   <!-- Our Services Section -->
   <section id="services">
     <h2>Our Services</h2>
-    <div class="services-grid">
-      <div class="service">
-        <img src="https://raw.githubusercontent.com/barera308/rancontracting/main/images/work2.jpeg" alt="Construction Service">
-        <h3>Construction</h3>
-        <p>High-quality construction services for residential and commercial projects.</p>
+    <div class="carousel" id="services-carousel">
+      <button class="carousel-arrow left" onclick="moveCarousel('services-carousel', -1)">&#10094;</button>
+      <div class="carousel-track">
+        <div class="carousel-item">
+          <img src="https://raw.githubusercontent.com/barera308/rancontracting/main/images/work.jpg" alt="Construction Service">
+          <h3>Construction</h3>
+          <p>High-quality construction for residential and commercial projects.</p>
+        </div>
+        <div class="carousel-item">
+          <img src="https://raw.githubusercontent.com/barera308/rancontracting/main/images/work2.jpeg" alt="Electrical Work">
+          <h3>Electrical</h3>
+          <p>Professional electrical installation and maintenance across UAE.</p>
+        </div>
+        <div class="carousel-item">
+          <img src="https://raw.githubusercontent.com/barera308/rancontracting/main/images/work4.jpg" alt="Plumbing Service">
+          <h3>Plumbing</h3>
+          <p>Reliable plumbing services ensuring smooth water systems.</p>
+        </div>
       </div>
-      <div class="service">
-        <img src="https://raw.githubusercontent.com/barera308/rancontracting/main/images/work3.jfif" alt="Electrical Work">
-        <h3>Electrical</h3>
-        <p>Professional electrical installation and maintenance solutions.</p>
-      </div>
-      <div class="service">
-        <img src="https://raw.githubusercontent.com/barera308/rancontracting/main/images/work4.jpg" alt="Plumbing Service">
-        <h3>Plumbing</h3>
-        <p>Reliable plumbing services ensuring smooth water and drainage systems.</p>
-      </div>
+      <button class="carousel-arrow right" onclick="moveCarousel('services-carousel', 1)">&#10095;</button>
     </div>
   </section>
 
   <!-- Our Team Section -->
   <section id="team">
     <h2>Our Team</h2>
-    <div class="team-members">
-      <div class="member">
-        <img src="https://raw.githubusercontent.com/barera308/rancontracting/refs/heads/main/images/zeeshan.jpg" alt="Muhammad Zeeshan Aslam - CEO" />
-        <h3>Muhammad Zeeshan Aslam</h3>
-        <p>Chief Executive Officer</p>
+    <div class="carousel" id="team-carousel">
+      <button class="carousel-arrow left" onclick="moveCarousel('team-carousel', -1)">&#10094;</button>
+      <div class="carousel-track">
+        <div class="carousel-item">
+          <img src="https://raw.githubusercontent.com/barera308/rancontracting/refs/heads/main/images/zeeshan.jpg" alt="Muhammad Zeeshan Aslam - CEO" />
+          <h3>Muhammad Zeeshan Aslam</h3>
+          <p>Chief Executive Officer</p>
+        </div>
+        <div class="carousel-item">
+          <img src="https://raw.githubusercontent.com/barera308/rancontracting/main/images/work3.jfif" alt="Ahmed - Project Manager" />
+          <h3>Ahmed</h3>
+          <p>Project Manager</p>
+        </div>
+        <div class="carousel-item">
+          <img src="https://raw.githubusercontent.com/barera308/rancontracting/main/images/work2.jpeg" alt="Fatima - Lead Electrician" />
+          <h3>Fatima</h3>
+          <p>Lead Electrician</p>
+        </div>
+        <div class="carousel-item">
+          <img src="https://raw.githubusercontent.com/barera308/rancontracting/main/images/work4.jpg" alt="Saeed - Plumbing Expert" />
+          <h3>Saeed</h3>
+          <p>Plumbing Expert</p>
+        </div>
+        <div class="carousel-item">
+          <img src="https://raw.githubusercontent.com/barera308/rancontracting/main/images/work.jpg" alt="Maya - Civil Engineer" />
+          <h3>Maya</h3>
+          <p>Civil Engineer</p>
+        </div>
       </div>
-      <div class="member">
-        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Ahmed - Project Manager" />
-        <h3>Ahmed</h3>
-        <p>Project Manager</p>
-      </div>
-      <div class="member">
-        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Fatima - Lead Electrician" />
-        <h3>Fatima</h3>
-        <p>Lead Electrician</p>
-      </div>
-      <div class="member">
-        <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="Saeed - Plumbing Expert" />
-        <h3>Saeed</h3>
-        <p>Plumbing Expert</p>
-      </div>
-      <div class="member">
-        <img src="https://randomuser.me/api/portraits/women/51.jpg" alt="Maya - Civil Engineer" />
-        <h3>Maya</h3>
-        <p>Civil Engineer</p>
-      </div>
+      <button class="carousel-arrow right" onclick="moveCarousel('team-carousel', 1)">&#10095;</button>
     </div>
   </section>
 
@@ -199,5 +247,44 @@
   <footer>
     <p>&copy; 2025 RanContracting. All Rights Reserved.</p>
   </footer>
+
+  <script>
+    function moveCarousel(carouselId, direction) {
+      const carousel = document.getElementById(carouselId);
+      const track = carousel.querySelector('.carousel-track');
+      const itemWidth = track.querySelector('.carousel-item').offsetWidth + 20; // include gap
+      track.scrollBy({ left: direction * itemWidth, behavior: 'smooth' });
+    }
+
+    // Optional: auto-scroll every 4 seconds
+    setInterval(() => {
+      document.querySelectorAll('.carousel').forEach(carousel => {
+        moveCarousel(carousel.id, 1);
+      });
+    }, 4000);
+
+    // Mobile swipe support
+    document.querySelectorAll('.carousel').forEach(carousel => {
+      let startX, isDragging = false;
+      const track = carousel.querySelector('.carousel-track');
+
+      track.addEventListener('touchstart', e => {
+        startX = e.touches[0].clientX;
+        isDragging = true;
+      });
+
+      track.addEventListener('touchmove', e => {
+        if(!isDragging) return;
+        const x = e.touches[0].clientX;
+        const walk = startX - x;
+        track.scrollLeft += walk;
+        startX = x;
+      });
+
+      track.addEventListener('touchend', e => {
+        isDragging = false;
+      });
+    });
+  </script>
 </body>
 </html>
