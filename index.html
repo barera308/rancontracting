@@ -41,16 +41,6 @@
       padding: 0 1rem;
     }
 
-    /* Removed .hero-logo style as the logo image is no longer present */
-
-    .hero-header h1 {
-      margin: 0;
-      font-size: 3rem; /* Larger heading */
-      font-weight: 700;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-      /* This h1 is effectively removed from the HTML structure, but keeping the style in case it's used elsewhere or if a similar heading is re-introduced */
-    }
-
     .hero-header p {
       margin: 0.5rem 0 1.5rem 0;
       font-size: 1.2rem;
@@ -116,7 +106,7 @@
       gap: 20px;
     }
     .carousel-item {
-      min-width: 280px; /* Adjusted min-width for better mobile display */
+      min-width: 280px;
       background: #f9f9f9;
       border-radius: 8px;
       text-align: center;
@@ -129,12 +119,27 @@
       transform: translateY(-5px);
       box-shadow: 0 8px 25px rgba(0,0,0,0.2);
     }
-    .carousel-item img {
+
+    /* New CSS for image aspect ratio wrapper */
+    .carousel-item-image-wrapper {
+      position: relative;
       width: 100%;
-      height: 200px; /* Slightly reduced height for better aspect ratio on mobile */
-      object-fit: cover;
-      border-bottom: 3px solid #004080; /* Stronger separation */
+      padding-bottom: 62.5%; /* This creates a 16:10 aspect ratio (250/400 = 0.625) */
+      overflow: hidden;
+      border-bottom: 3px solid #004080;
+      background-color: #eee; /* Fallback background for wrapper */
     }
+
+    .carousel-item-image-wrapper img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Image will cover the aspect ratio container */
+      object-position: center;
+    }
+
     .carousel-item h3 {
       margin: 15px 0 8px 0;
       color: #004080;
@@ -267,10 +272,6 @@
         min-height: 350px;
         padding: 1.5rem 0.5rem;
       }
-      /* Removed hero-logo responsive style */
-      .hero-header h1 {
-        font-size: 2.2rem;
-      }
       .hero-header p {
         font-size: 1rem;
       }
@@ -315,14 +316,12 @@
     }
 
     @media(max-width: 480px) {
-      .hero-header h1 {
-        font-size: 1.8rem;
-      }
       .hero-header p {
         font-size: 0.9rem;
       }
-      .carousel-item img {
-        height: 180px;
+      /* Adjusted for square aspect ratio on smaller mobile screens */
+      .carousel-item-image-wrapper {
+        padding-bottom: 100%; /* Creates a 1:1 square aspect ratio */
       }
     }
   </style>
@@ -332,8 +331,6 @@
   <!-- Hero Header Section -->
   <header class="hero-header" id="home">
     <div class="hero-content">
-      <!-- Removed Logo -->
-      <!-- Removed Site Name H1 -->
       <p>Your Trusted Partner for Construction & Contracting Services</p>
 
       <!-- Navigation -->
@@ -354,32 +351,56 @@
       <button class="carousel-arrow left" aria-label="Previous service">&#10094;</button>
       <div class="carousel-track">
         <div class="carousel-item">
-          <img src="https://raw.githubusercontent.com/barera308/rancontracting/main/images/work2.jpg" alt="Construction Service">
+          <div class="carousel-item-image-wrapper">
+            <img src="https://raw.githubusercontent.com/barera308/rancontracting/main/images/work2.jpg" 
+                 onerror="this.onerror=null;this.src='https://placehold.co/400x400/cccccc/333333?text=Construction';" 
+                 alt="Construction Service">
+          </div>
           <h3>Construction</h3>
           <p>High-quality construction for residential and commercial projects, built to last and designed for excellence.</p>
         </div>
         <div class="carousel-item">
-          <img src="https://raw.githubusercontent.com/barera308/rancontracting/main/images/electrical.jfif" alt="Electrical Work">
+          <div class="carousel-item-image-wrapper">
+            <img src="https://raw.githubusercontent.com/barera308/rancontracting/main/images/electrical.jfif" 
+                 onerror="this.onerror=null;this.src='https://placehold.co/400x400/cccccc/333333?text=Electrical';" 
+                 alt="Electrical Work">
+          </div>
           <h3>Electrical</h3>
           <p>Professional electrical installation, upgrades, and maintenance across UAE, ensuring safety and efficiency.</p>
         </div>
         <div class="carousel-item">
-          <img src="https://raw.githubusercontent.com/barera308/rancontracting/main/images/work4.jpg" alt="Plumbing Service">
+          <div class="carousel-item-image-wrapper">
+            <img src="https://raw.githubusercontent.com/barera308/rancontracting/main/images/work4.jpg" 
+                 onerror="this.onerror=null;this.src='https://placehold.co/400x400/cccccc/333333?text=Plumbing';" 
+                 alt="Plumbing Service">
+          </div>
           <h3>Plumbing</h3>
           <p>Reliable plumbing services including new installations, repairs, and system maintenance for smooth water systems.</p>
         </div>
         <div class="carousel-item">
-          <img src="https://raw.githubusercontent.com/barera308/rancontracting/main/images/flooring.jpeg" alt="Flooring Service">
+          <div class="carousel-item-image-wrapper">
+            <img src="https://raw.githubusercontent.com/barera308/rancontracting/main/images/flooring.jpeg" 
+                 onerror="this.onerror=null;this.src='https://placehold.co/400x400/cccccc/333333?text=Flooring';" 
+                 alt="Flooring Service">
+          </div>
           <h3>Flooring</h3>
           <p>Expert flooring solutions with durable, stylish, and high-quality finishes to elevate any space.</p>
         </div>
         <div class="carousel-item">
-          <img src="https://raw.githubusercontent.com/barera308/rancontracting/refs/heads/main/images/maintance.webp" alt="Maintenance Service">
+          <div class="carousel-item-image-wrapper">
+            <img src="https://raw.githubusercontent.com/barera308/rancontracting/refs/heads/main/images/maintance.webp" 
+                 onerror="this.onerror=null;this.src='https://placehold.co/400x400/cccccc/333333?text=Maintenance';" 
+                 alt="Maintenance Service">
+          </div>
           <h3>Maintenance</h3>
           <p>Comprehensive building maintenance services to keep your property in optimal condition year-round.</p>
         </div>
         <div class="carousel-item">
-          <img src="https://raw.githubusercontent.com/barera308/rancontracting/refs/heads/main/images/contraction%2520work2.webp" alt="Additional Construction Work">
+          <div class="carousel-item-image-wrapper">
+            <img src="https://raw.githubusercontent.com/barera308/rancontracting/refs/heads/main/images/contraction%2520work2.webp" 
+                 onerror="this.onerror=null;this.src='https://placehold.co/400x400/cccccc/333333?text=Additional+Construction';" 
+                 alt="Additional Construction Work">
+          </div>
           <h3>Additional Construction</h3>
           <p>Specialized construction projects, renovations, and custom builds handled with professionalism and meticulous care.</p>
         </div>
@@ -492,7 +513,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const startAutoScroll = () => {
       autoScrollInterval = setInterval(() => {
         rightBtn.click();
-      }, 4000); // Scrolls every 4 seconds
+      }, **20000**); // Scrolls every 20 seconds (changed from 8000)
     };
 
     const stopAutoScroll = () => {
