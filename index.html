@@ -15,15 +15,29 @@
       background: #004080;
       color: #fff;
       padding: 1rem;
-      text-align: center;
     }
-    header img {
-      height: 60px;
-      display: block;
-      margin: 0 auto 10px;
+    .header-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .logo {
+      height: 120px; /* bigger logo */
+      width: auto;
+    }
+    .header-text h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    .header-text p {
+      margin: 0;
+      font-size: 1rem;
     }
     nav {
       margin-top: 10px;
+      text-align: center;
     }
     nav a {
       color: #fff;
@@ -86,13 +100,26 @@
       padding: 1rem;
       margin-top: 2rem;
     }
+    @media(max-width: 600px) {
+      .header-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      .member, .service {
+        width: 80%;
+      }
+    }
   </style>
 </head>
 <body>
   <header>
-    <img src="https://raw.githubusercontent.com/barera308/rancontracting/main/images/logo.jpeg" alt="RanContracting Logo">
-    <h1>RanContracting</h1>
-    <p>Your Trusted Partner in Contracting & Construction</p>
+    <div class="header-container">
+      <img src="https://raw.githubusercontent.com/barera308/rancontracting/main/images/logo.jpeg" alt="RanContracting Logo" class="logo">
+      <div class="header-text">
+        <h1>RanContracting</h1>
+        <p>Your Trusted Partner in Contracting & Construction</p>
+      </div>
+    </div>
     <nav>
       <a href="#services">Our Services</a>
       <a href="#team">Our Team</a>
@@ -106,7 +133,7 @@
     <h2>Our Services</h2>
     <div class="services-grid">
       <div class="service">
-        <img src="https://raw.githubusercontent.com/barera308/rancontracting/main/images/work2.jpg" alt="Construction Service">
+        <img src="https://raw.githubusercontent.com/barera308/rancontracting/main/images/work2.jpeg" alt="Construction Service">
         <h3>Construction</h3>
         <p>High-quality construction services for residential and commercial projects.</p>
       </div>
@@ -174,6 +201,3 @@
   </footer>
 </body>
 </html>
-
-
-
