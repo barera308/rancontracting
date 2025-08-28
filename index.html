@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>RanContracting - Construction & Contracting Services</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <!-- Link to the external stylesheet -->
+  <link rel="stylesheet" href="style.css"> 
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
@@ -34,7 +35,7 @@
       <div class="carousel-track">
         <div class="carousel-item">
           <div class="carousel-item-image-wrapper">
-            <img src="images/work2.jpg" 
+            <img src="https://raw.githubusercontent.com/barera308/rancontracting/main/images/work2.jpg" 
                  onerror="this.onerror=null;this.src='https://placehold.co/400x400/cccccc/333333?text=Construction';" 
                  alt="Construction Service">
           </div>
@@ -43,7 +44,7 @@
         </div>
         <div class="carousel-item">
           <div class="carousel-item-image-wrapper">
-            <img src="images/electrical.jfif" 
+            <img src="https://raw.githubusercontent.com/barera308/rancontracting/main/images/electrical.jfif" 
                  onerror="this.onerror=null;this.src='https://placehold.co/400x400/cccccc/333333?text=Electrical';" 
                  alt="Electrical Work">
           </div>
@@ -52,7 +53,7 @@
         </div>
         <div class="carousel-item">
           <div class="carousel-item-image-wrapper">
-            <img src="images/work4.jpg" 
+            <img src="https://raw.githubusercontent.com/barera308/rancontracting/main/images/work4.jpg" 
                  onerror="this.onerror=null;this.src='https://placehold.co/400x400/cccccc/333333?text=Plumbing';" 
                  alt="Plumbing Service">
           </div>
@@ -61,7 +62,7 @@
         </div>
         <div class="carousel-item">
           <div class="carousel-item-image-wrapper">
-            <img src="images/flooring.jpeg" 
+            <img src="https://raw.githubusercontent.com/barera308/rancontracting/main/images/flooring.jpeg" 
                  onerror="this.onerror=null;this.src='https://placehold.co/400x400/cccccc/333333?text=Flooring';" 
                  alt="Flooring Service">
           </div>
@@ -70,7 +71,7 @@
         </div>
         <div class="carousel-item">
           <div class="carousel-item-image-wrapper">
-            <img src="images/maintance.webp" 
+            <img src="https://raw.githubusercontent.com/barera308/rancontracting/refs/heads/main/images/maintance.webp" 
                  onerror="this.onerror=null;this.src='https://placehold.co/400x400/cccccc/333333?text=Maintenance';" 
                  alt="Maintenance Service">
           </div>
@@ -79,7 +80,7 @@
         </div>
         <div class="carousel-item">
           <div class="carousel-item-image-wrapper">
-            <img src="images/contraction%20work2.webp" 
+            <img src="https://raw.githubusercontent.com/barera308/rancontracting/refs/heads/main/images/contraction%2520work2.webp" 
                  onerror="this.onerror=null;this.src='https://placehold.co/400x400/cccccc/333333?text=Additional+Construction';" 
                  alt="Additional Construction Work">
           </div>
@@ -96,7 +97,7 @@
     <h2>Meet Our Expert Team</h2>
     <div class="team-members">
       <div class="member">
-        <img src="images/zeeshan.jpg" alt="Muhammad Zeeshan Aslam - CEO" />
+        <img src="https://raw.githubusercontent.com/barera308/rancontracting/refs/heads/main/images/zeeshan.jpg" alt="Muhammad Zeeshan Aslam - CEO" />
         <h3>Muhammad Zeeshan Aslam</h3>
         <p>Chief Executive Officer</p>
       </div>
@@ -146,8 +147,125 @@
     <p>&copy; 2025 RanContracting. All Rights Reserved.</p>
   </footer>
 
-  <!-- Carousel & Smooth Scroll JS -->
-  <script src="carousel.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.carousel').forEach(carousel => {
+    const track = carousel.querySelector('.carousel-track');
+    const items = [...track.children];
+    const leftBtn = carousel.querySelector('.carousel-arrow.left');
+    const rightBtn = carousel.querySelector('.carousel-arrow.right');
+    const gap = 20; // Hardcoding gap to match CSS for calculation consistency
+    let index = 0;
+
+    const getVisibleItemsCount = () => {
+      if (items.length === 0) return 0;
+      const carouselWidth = carousel.offsetWidth;
+      const itemWidthWithGap = items[0].offsetWidth + gap;
+      let count = Math.floor(carouselWidth / itemWidthWithGap);
+      return Math.max(1, count); // Ensure at least 1 item is visible if items exist
+    };
+
+    const updateCarousel = () => {
+      const itemWidth = items[0].offsetWidth + gap;
+      track.style.transform = `translateX(${-index * itemWidth}px)`;
+    };
+
+    // Initialize carousel on load and resize
+    const initializeCarousel = () => {
+      // Ensure initial position is correct
+      index = 0;
+      updateCarousel();
+    };
+
+    window.addEventListener('resize', initializeCarousel);
+    initializeCarousel(); // Initial call
+
+    leftBtn.addEventListener('click', () => {
+      index = Math.max(0, index - 1); // Decrement and clamp at 0
+      updateCarousel();
+    });
+
+    rightBtn.addEventListener('click', () => {
+      const maxIndex = items.length - getVisibleItemsCount();
+      index = Math.min(maxIndex, index + 1); // Increment and clamp at maxIndex
+      updateCarousel();
+    });
+
+    // Auto-scroll functionality
+    let autoScrollInterval;
+    const advanceCarousel = () => {
+      const maxIndex = items.length - getVisibleItemsCount();
+      if (index < maxIndex) {
+        index++;
+      } else {
+        index = 0; // Loop back to the beginning when reaching the end for auto-scroll
+      }
+      updateCarousel();
+    };
+
+    const startAutoScroll = () => {
+      autoScrollInterval = setInterval(advanceCarousel, 20000); // Scrolls every 20 seconds
+    };
+
+    const stopAutoScroll = () => {
+      clearInterval(autoScrollInterval);
+    };
+
+    // Pause auto-scroll on hover/touch and resume after
+    carousel.addEventListener('mouseenter', stopAutoScroll);
+    carousel.addEventListener('mouseleave', startAutoScroll);
+    carousel.addEventListener('touchstart', stopAutoScroll);
+    carousel.addEventListener('touchend', startAutoScroll);
+
+    startAutoScroll(); // Start auto-scroll initially
+
+    // Touch support (improved)
+    let startX = 0;
+    let currentTranslate = 0;
+    let prevTranslate = 0;
+    // Removed animationID as it was not being used.
+
+    track.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+      prevTranslate = currentTranslate;
+      stopAutoScroll(); // Pause auto-scroll during manual interaction
+      // Removed cancelAnimationFrame(animationID); as animationID is not used for this.
+    });
+
+    track.addEventListener('touchmove', (e) => {
+      const currentX = e.touches[0].clientX;
+      const diff = currentX - startX;
+      currentTranslate = prevTranslate + diff;
+      track.style.transform = `translateX(${currentTranslate}px)`;
+    });
+
+    track.addEventListener('touchend', () => {
+      const movedBy = currentTranslate - prevTranslate;
+      const itemWidth = items[0].offsetWidth + gap;
+      const maxIndex = items.length - getVisibleItemsCount(); // Recalculate maxIndex
+
+      if (movedBy < -50) { // Swiped left significantly
+        index = Math.min(index + 1, maxIndex);
+      } else if (movedBy > 50) { // Swiped right significantly
+        index = Math.max(index - 1, 0);
+      }
+      
+      updateCarousel();
+      startAutoScroll(); // Resume auto-scroll
+    });
+  });
+
+  // Smooth scrolling for navigation links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+
+      document.querySelector(this.getAttribute('href')).scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
+  });
+});
+</script>
 </body>
 </html>
-
