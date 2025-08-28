@@ -59,7 +59,7 @@
       margin-bottom: 1rem;
     }
 
-    /* Carousel container */
+    /* Carousel container for services */
     .carousel {
       position: relative;
       overflow: hidden;
@@ -94,7 +94,6 @@
       font-size: 0.95rem;
     }
 
-    /* Carousel arrows */
     .carousel-arrow {
       position: absolute;
       top: 50%;
@@ -132,6 +131,34 @@
       background: #e6b800;
     }
 
+    .team-members {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+    .team-members .member {
+      background: #e6f0ff;
+      border-radius: 8px;
+      padding: 15px;
+      width: 220px;
+      text-align: center;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    .team-members .member:hover {
+      transform: translateY(-5px);
+    }
+    .team-members img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin-bottom: 12px;
+      object-fit: cover;
+      border: 3px solid #004080;
+    }
+
     footer {
       background: #004080;
       color: #fff;
@@ -147,6 +174,9 @@
       }
       .carousel-item {
         min-width: 80%;
+      }
+      .team-members .member {
+        width: 80%;
       }
     }
   </style>
@@ -180,7 +210,7 @@
           <p>High-quality construction for residential and commercial projects.</p>
         </div>
         <div class="carousel-item">
-          <img src="https://raw.githubusercontent.com/barera308/rancontracting/main/images/work3.jpeg" alt="Electrical Work">
+          <img src="https://raw.githubusercontent.com/barera308/rancontracting/main/images/work3.jfif" alt="Electrical Work">
           <h3>Electrical</h3>
           <p>Professional electrical installation and maintenance across UAE.</p>
         </div>
@@ -197,40 +227,36 @@
   <!-- Our Team Section -->
   <section id="team">
     <h2>Our Team</h2>
-    <div class="carousel" id="team-carousel">
-      <button class="carousel-arrow left" onclick="moveCarousel('team-carousel', -1)">&#10094;</button>
-      <div class="carousel-track">
-        <div class="carousel-item">
-          <img src="https://raw.githubusercontent.com/barera308/rancontracting/refs/heads/main/images/zeeshan.jpg" alt="Muhammad Zeeshan Aslam - CEO" />
-          <h3>Muhammad Zeeshan Aslam</h3>
-          <p>Chief Executive Officer</p>
-        </div>
-        <div class="carousel-item">
-          <img src="https://raw.githubusercontent.com/barera308/rancontracting/main/images/work3.jfif" alt="Ahmed - Project Manager" />
-          <h3>Ahmed</h3>
-          <p>Project Manager</p>
-        </div>
-        <div class="carousel-item">
-          <img src="https://raw.githubusercontent.com/barera308/rancontracting/main/images/work2.jpeg" alt="Fatima - Lead Electrician" />
-          <h3>Fatima</h3>
-          <p>Lead Electrician</p>
-        </div>
-        <div class="carousel-item">
-          <img src="https://raw.githubusercontent.com/barera308/rancontracting/main/images/work4.jpg" alt="Saeed - Plumbing Expert" />
-          <h3>Saeed</h3>
-          <p>Plumbing Expert</p>
-        </div>
-        <div class="carousel-item">
-          <img src="https://raw.githubusercontent.com/barera308/rancontracting/main/images/work.jpg" alt="Maya - Civil Engineer" />
-          <h3>Maya</h3>
-          <p>Civil Engineer</p>
-        </div>
+    <div class="team-members">
+      <div class="member">
+        <img src="https://raw.githubusercontent.com/barera308/rancontracting/refs/heads/main/images/zeeshan.jpg" alt="Muhammad Zeeshan Aslam - CEO" />
+        <h3>Muhammad Zeeshan Aslam</h3>
+        <p>Chief Executive Officer</p>
       </div>
-      <button class="carousel-arrow right" onclick="moveCarousel('team-carousel', 1)">&#10095;</button>
+      <div class="member">
+        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Ahmed - Project Manager" />
+        <h3>Ahmed</h3>
+        <p>Project Manager</p>
+      </div>
+      <div class="member">
+        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Fatima - Lead Electrician" />
+        <h3>Fatima</h3>
+        <p>Lead Electrician</p>
+      </div>
+      <div class="member">
+        <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="Saeed - Plumbing Expert" />
+        <h3>Saeed</h3>
+        <p>Plumbing Expert</p>
+      </div>
+      <div class="member">
+        <img src="https://randomuser.me/api/portraits/women/51.jpg" alt="Maya - Civil Engineer" />
+        <h3>Maya</h3>
+        <p>Civil Engineer</p>
+      </div>
     </div>
   </section>
 
-  <!-- Career / Submit CV Section -->
+  <!-- Career Section -->
   <section id="career">
     <h2>Join Our Team</h2>
     <a class="career-btn" href="https://formsubmit.co/admin@rancontracting.com" target="_blank">Submit Your CV</a>
@@ -256,7 +282,7 @@
       track.scrollBy({ left: direction * itemWidth, behavior: 'smooth' });
     }
 
-    // Optional: auto-scroll every 4 seconds
+    // Auto-scroll every 4 seconds
     setInterval(() => {
       document.querySelectorAll('.carousel').forEach(carousel => {
         moveCarousel(carousel.id, 1);
@@ -281,11 +307,10 @@
         startX = x;
       });
 
-      track.addEventListener('touchend', e => {
+      track.addEventListener('touchend', () => {
         isDragging = false;
       });
     });
   </script>
 </body>
 </html>
-
