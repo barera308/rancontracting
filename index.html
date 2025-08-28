@@ -289,56 +289,49 @@
   <footer>
     <p>&copy; 2025 RanContracting. All Rights Reserved.</p>
   </footer>
+<script>
+document.querySelectorAll('.carousel').forEach(carousel => {
+  const track = carousel.querySelector('.carousel-track');
+  const items = [...track.children];
+  const leftBtn = carousel.querySelector('.carousel-arrow.left');
+  const rightBtn = carousel.querySelector('.carousel-arrow.right');
+  const gap = parseInt(getComputedStyle(track).gap) || 0;
+  let index = 0;
 
-  <script>
-    const carousels = document.querySelectorAll('.carousel');
-    carousels.forEach(carousel => {
-      const track = carousel.querySelector('.carousel-track');
-      const items = track.children;
-      const leftArrow = carousel.querySelector('.carousel-arrow.left');
-      const rightArrow = carousel.querySelector('.carousel-arrow.right');
-      let index = 0;
+  function updateCarousel() {
+    const itemWidth = items[0].offsetWidth + gap;
+    track.style.transform = `translateX(${-index * itemWidth}px)`;
+  }
 
-      function updateCarousel() {
-        const itemWidth = items[0].offsetWidth + parseInt(getComputedStyle(track).gap);
-        track.style.transform = `translateX(-${index * itemWidth}px)`;
-      }
+  leftBtn.addEventListener('click', () => {
+    index--;
+    if(index < 0) index = items.length - Math.floor(carousel.offsetWidth / (items[0].offsetWidth + gap));
+    updateCarousel();
+  });
 
-      leftArrow.addEventListener('click', () => {
-        index--;
-        if(index < 0) index = items.length - 1;
-        updateCarousel();
-      });
+  rightBtn.addEventListener('click', () => {
+    index++;
+    if(index > items.length - Math.floor(carousel.offsetWidth / (items[0].offsetWidth + gap))) index = 0;
+    updateCarousel();
+  });
 
-      rightArrow.addEventListener('click', () => {
-        index++;
-        if(index >= items.length) index = 0;
-        updateCarousel();
-      });
+  // Auto-scroll
+  setInterval(() => {
+    rightBtn.click();
+  }, 4000);
 
-      // Auto-scroll
-      setInterval(() => {
-        index++;
-        if(index >= items.length) index = 0;
-        updateCarousel();
-      }, 4000);
-
-      // Mobile swipe
-      let startX = 0, isDragging = false;
-      track.addEventListener('touchstart', e => {
-        startX = e.touches[0].clientX;
-        isDragging = true;
-      });
-      track.addEventListener('touchmove', e => {
-        if(!isDragging) return;
-        const x = e.touches[0].clientX;
-        const walk = startX - x;
-        track.scrollLeft += walk;
-        startX = x;
-      });
-      track.addEventListener('touchend', () => { isDragging = false; });
-    });
-  </script>
+  // Touch support
+  let startX = 0, isDragging = false;
+  track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; isDragging=true; });
+  track.addEventListener('touchmove', e => {
+    if(!isDragging) return;
+    const walk = startX - e.touches[0].clientX;
+    track.style.transform = `translateX(${-index * (items[0].offsetWidth + gap) - walk}px)`;
+  });
+  track.addEventListener('touchend', () => { isDragging=false; updateCarousel(); });
+});
+</script>
 </body>
 </html>
+
 
