@@ -186,7 +186,7 @@
 <body>
   <header>
     <div class="header-container">
-      <img src="https://raw.githubusercontent.com/barera308/rancontracting/main/images/logo.jepg" alt="RanContracting Logo" class="logo">
+      <img src="https://raw.githubusercontent.com/barera308/rancontracting/main/images/logo.jpeg" alt="RanContracting Logo" class="logo">
       <div class="header-text">
         <h1>RanContracting</h1>
         <p>Your Trusted Partner in Contracting & Construction</p>
@@ -232,13 +232,13 @@
         </div>
 
         <div class="carousel-item">
-          <img src="https://raw.githubusercontent.com/barera308/rancontracting/main/images/maintenance.webp" alt="Maintenance Service">
+          <img src="https://raw.githubusercontent.com/barera308/rancontracting/main/images/maintenance.jpg" alt="Maintenance Service">
           <h3>Maintenance</h3>
           <p>Comprehensive building maintenance to keep your property in top condition.</p>
         </div>
 
         <div class="carousel-item">
-          <img src="https://raw.githubusercontent.com/barera308/rancontracting/main/images/contraction%20work2.webp" alt="Additional Construction Work">
+          <img src="https://raw.githubusercontent.com/barera308/rancontracting/main/images/contraction%20work2.jpg" alt="Additional Construction Work">
           <h3>Additional Construction</h3>
           <p>Specialized construction projects handled with professionalism and care.</p>
         </div>
@@ -308,10 +308,11 @@
 
       let newScroll = track.scrollLeft + direction * itemWidth;
 
-      // Prevent overscroll
-      if (newScroll < 0) newScroll = 0;
-      if (newScroll > track.scrollWidth - track.clientWidth) {
+      // Infinite looping
+      if (newScroll < 0) {
         newScroll = track.scrollWidth - track.clientWidth;
+      } else if (newScroll > track.scrollWidth - track.clientWidth) {
+        newScroll = 0;
       }
 
       track.scrollTo({ left: newScroll, behavior: 'smooth' });
@@ -349,5 +350,3 @@
   </script>
 </body>
 </html>
-
-
